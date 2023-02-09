@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JS Drum Kit</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://fav.farm/🔥" />
+</head>
+<body>
+
+
+  <div class="keys">
+    <div flex>
+    <div data-key="65" class="key">
+      <kbd>A</kbd>
+      <span class="sound">clap</span>
+    </div>
+    <div data-key="83" class="key">
+      <kbd>S</kbd>
+      <span class="sound">Whistle</span>
+    </div>
+    <div data-key="68" class="key">
+      <kbd>D</kbd>
+      <span class="sound">Sneeze</span>
+    </div>
+    <div data-key="70" class="key">
+      <kbd>F</kbd>
+      <span class="sound">Gasp</span>
+    </div>
+  </div>
+  <div flex>
+    <div data-key="71" class="key">
+      <kbd>G</kbd>
+      <span class="sound">Crowd Laugh</span>
+    </div>
+    <div data-key="72" class="key">
+      <kbd>H</kbd>
+      <span class="sound">roar</span>
+    </div>
+    <div data-key="74" class="key">
+      <kbd>J</kbd>
+      <span class="sound">Success</span>
+    </div>
+    <div data-key="75" class="key">
+      <kbd>K</kbd>
+      <span class="sound">Whoosh</span>
+    </div>
+    </div>
+    <div data-key="76" class="key">
+      <kbd>L</kbd>
+      <span class="sound">Falling electrons</span>
+    </div>
+  </div>
+
+  <audio data-key="65" src="sounds/clap.wav"></audio>
+  <audio data-key="83" src="sounds/mixkit-cartoon-toy-whistle-616.wav"></audio>
+  <audio data-key="68" src="sounds/mixkit-sick-man-sneeze-2213.wav"></audio>
+  <audio data-key="70" src="sounds/mixkit-female-astonished-gasp-964.wav"></audio>
+  <audio data-key="71" src="sounds/mixkit-crowd-laugh-424.wav"></audio>
+  <audio data-key="72" src="sounds/mixkit-wild-lion-animal-roar-6.wav"></audio>
+  <audio data-key="74" src="sounds/mixkit-retro-game-notification-212.wav"></audio>
+  <audio data-key="75" src="sounds/mixkit-fast-small-sweep-transition-166.wav"></audio>
+  <audio data-key="76" src="sounds/mixkit-arcade-retro-game-over-213.wav"></audio>
+
+<script>
+
+function playSound(e) {
+const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+if(!audio) return;
+audio.currentTime = 0;
+audio.play();
+key.classList.add('playing');
+}
+function removeTransition(e){
+ if(e.propertyName !== 'transform') return;
+ this.classList.remove('playing'); 
+}
+window.addEventListener('keydown', playSound);
+const keys = document.querySelectorAll('.key');
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+</script>
+
+
+</body>
+</html>
